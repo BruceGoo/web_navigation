@@ -2,7 +2,7 @@ export interface Tool {
   id: number;
   name: string;
   description: string;
-  category: 'json-tools' | 'yaml-xml-tools' | 'markdown-tools' | 'smart-tools';
+  category: 'json-tools' | 'yaml-xml-tools' | 'markdown-tools' | 'smart-tools' | 'config-formatter' | 'config-templates';
   icon: string;
   url: string;
   tags: string[];
@@ -183,6 +183,76 @@ export const toolsData: Tool[] = [
     featured: true,
     gradient: "from-red-500 to-pink-500"
   },
+
+  // 配置格式化工具
+  {
+    id: 16,
+    name: "配置格式化器",
+    description: "Nginx、Dockerfile、YAML等配置文件格式化和校验工具",
+    category: "config-formatter",
+    icon: "⚙️",
+    url: "/tools/config-formatter",
+    tags: ["配置", "格式化", "Nginx", "Dockerfile", "YAML"],
+    featured: true,
+    gradient: "from-purple-500 to-indigo-500"
+  },
+  {
+    id: 17,
+    name: "多格式配置转换",
+    description: "JSON、YAML、TOML、INI、Properties等配置格式互转",
+    category: "config-formatter",
+    icon: "🔄",
+    url: "/tools/config-formatter/multi-format",
+    tags: ["JSON", "YAML", "TOML", "INI", "格式转换"],
+    featured: true,
+    gradient: "from-blue-500 to-cyan-500"
+  },
+  {
+    id: 18,
+    name: "Nginx配置格式化",
+    description: "Nginx配置文件格式化、语法检查和最佳实践建议",
+    category: "config-formatter",
+    icon: "🌐",
+    url: "/tools/config-formatter/nginx",
+    tags: ["Nginx", "配置", "格式化", "语法检查"],
+    featured: true,
+    gradient: "from-green-500 to-emerald-500"
+  },
+  {
+    id: 19,
+    name: "Dockerfile格式化",
+    description: "Dockerfile格式化、指令排序和最佳实践检查",
+    category: "config-formatter",
+    icon: "🐳",
+    url: "/tools/config-formatter/dockerfile",
+    tags: ["Dockerfile", "容器", "格式化", "最佳实践"],
+    featured: false,
+    gradient: "from-blue-600 to-blue-400"
+  },
+  {
+    id: 20,
+    name: "Kubernetes YAML工具",
+    description: "Kubernetes YAML格式化、资源识别和Schema校验",
+    category: "config-formatter",
+    icon: "☸️",
+    url: "/tools/config-formatter/kubernetes",
+    tags: ["Kubernetes", "YAML", "K8s", "资源验证"],
+    featured: true,
+    gradient: "from-purple-500 to-indigo-500"
+  },
+
+  // 配置模板库
+  {
+    id: 21,
+    name: "配置模板中心",
+    description: "专业的配置文件模板库，包含Nginx、Docker、K8s等常用配置模板",
+    category: "config-templates",
+    icon: "📋",
+    url: "/tools/config-templates",
+    tags: ["模板", "配置", "Nginx", "Docker", "Kubernetes"],
+    featured: true,
+    gradient: "from-indigo-500 to-purple-500"
+  },
 ];
 
 export const categories = [
@@ -191,4 +261,6 @@ export const categories = [
   { id: 'yaml-xml-tools', name: 'YAML/XML', icon: '📝' },
   { id: 'markdown-tools', name: 'Markdown', icon: '📝' },
   { id: 'smart-tools', name: '智能工具', icon: '🛠️' },
+  { id: 'config-formatter', name: '配置格式化', icon: '⚙️' },
+  { id: 'config-templates', name: '配置模板', icon: '📋' },
 ] as const;

@@ -27,7 +27,11 @@
       "Bash(nul)",
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\n修复所有语法错误并完成构建\n\n- 修复了app/page.tsx中的ToolCard组件TypeScript类型错误\n- 修复了markdown-preview和markdown-to-html工具中的marked库配置问题\n- 更新了marked库到新版本(17.0.0)并适配Promise API\n- 安装了必要的TypeScript类型包(@types/js-yaml)\n- 移除了所有不支持的marked配置选项\n- 重新创建了损坏的markdown工具文件\n- 应用程序现在可以成功构建并运行\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(timeout 10s npm run dev)",
+      "Bash(npx kill-port:*)"
     ],
     "deny": [],
     "ask": []
