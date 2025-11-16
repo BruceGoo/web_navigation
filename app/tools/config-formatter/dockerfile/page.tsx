@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";;
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import Editor from '@monaco-editor/react';
 import {
   Code,
@@ -14,7 +15,9 @@ import {
   Settings,
   ArrowUpDown,
   FileText,
-  Layers
+  Layers,
+  Home,
+  ChevronRight
 } from 'lucide-react';
 
 interface DockerfileFormatOptions {
@@ -422,8 +425,7 @@ CMD ["node", "dist/index.js"]`;
   }, [inputContent, options]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 dark:from-gray-900 dark:via-blue-900 dark:to-cyan-900"
-    >
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 dark:from-gray-900 dark:via-blue-900 dark:to-cyan-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <motion.div
@@ -431,12 +433,43 @@ CMD ["node", "dist/index.js"]`;
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4"
+          {/* 面包屑导航 */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-4"
           >
+            <Link href="/" className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <Home className="w-4 h-4 mr-1" />
+              主页
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link href="/tools/config-formatter" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              配置格式化器
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-gray-900 dark:text-gray-100">Dockerfile 格式化器</span>
+          </motion.div>
+
+          {/* 返回按钮 */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="mb-6"
+          >
+            <Link
+              href="/tools/config-formatter"
+              className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+            >
+              <ChevronRight className="w-4 h-4 mr-1 rotate-180" />
+              返回配置格式化器
+            </Link>
+          </motion.div>
+
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4">
             Dockerfile 格式化器
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
-          >
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             专业的 Dockerfile 格式化工具，支持指令排序、语法校验和最佳实践建议
           </p>
         </motion.div>
@@ -705,6 +738,8 @@ CMD ["node", "dist/index.js"]`;
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center"
               >
                 <Layers className="w-5 h-5 mr-2" />
+  Home,
+  ChevronRight
                 格式化结果
               </h3>
 

@@ -31,7 +31,10 @@
       "Bash(cat:*)",
       "Bash(grep:*)",
       "Bash(timeout 10s npm run dev)",
-      "Bash(npx kill-port:*)"
+      "Bash(npx kill-port:*)",
+      "Bash(chmod:*)",
+      "Bash(npx:*)",
+      "Bash(timeout:*)"
     ],
     "deny": [],
     "ask": []

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";;
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import Editor from '@monaco-editor/react';
 import {
   ArrowLeftRight,
@@ -10,7 +11,9 @@ import {
   Upload,
   CheckCircle,
   AlertCircle,
-  RotateCcw
+  RotateCcw,
+  Home,
+  ChevronRight
 } from 'lucide-react';
 import yaml from 'js-yaml';
 import ini from 'ini';
@@ -327,6 +330,38 @@ export default function MultiFormatConverter() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 dark:from-gray-900 dark:via-blue-900 dark:to-cyan-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* 面包屑导航 */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-4"
+        >
+          <Link href="/" className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Home className="w-4 h-4 mr-1" />
+            主页
+          </Link>
+          <ChevronRight className="w-4 h-4" />
+          <Link href="/tools/config-formatter" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            配置格式化器
+          </Link>
+          <ChevronRight className="w-4 h-4" />
+          <span className="text-gray-900 dark:text-gray-100">多格式转换器</span>
+        </motion.div>
+
+        {/* 返回按钮 */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="mb-6"
+        >
+          <Link
+            href="/tools/config-formatter"
+            className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+          >
+            <ChevronRight className="w-4 h-4 mr-1 rotate-180" />
+            返回配置格式化器
+          </Link>
+        </motion.div>
         {/* 页面标题 */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -469,6 +504,8 @@ export default function MultiFormatConverter() {
                 className="flex items-center px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors text-sm"
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
+  Home,
+  ChevronRight
                 清空
               </button>
             </div>

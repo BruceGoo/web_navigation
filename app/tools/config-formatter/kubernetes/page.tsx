@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import Editor from '@monaco-editor/react';
 import {
   Code,
@@ -16,6 +17,7 @@ import {
   Network,
   Lock
 } from 'lucide-react';
+import { Home, ChevronRight } from 'lucide-react';
 import * as yaml from 'js-yaml';
 
 interface K8sResource {
@@ -482,6 +484,39 @@ spec:
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
+          {/* 面包屑导航 */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-4"
+          >
+            <Link href="/" className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <Home className="w-4 h-4 mr-1" />
+              主页
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link href="/tools/config-formatter" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              配置格式化器
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-gray-900 dark:text-gray-100">Kubernetes 配置格式化器</span>
+          </motion.div>
+
+          {/* 返回按钮 */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="mb-6"
+          >
+            <Link
+              href="/tools/config-formatter"
+              className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+            >
+              <ChevronRight className="w-4 h-4 mr-1 rotate-180" />
+              返回配置格式化器
+            </Link>
+          </motion.div>
+
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
             Kubernetes 配置格式化器
           </h1>

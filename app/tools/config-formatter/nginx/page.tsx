@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from "react";;
+import { useState, useEffect, useCallback } from "react";
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import Editor from '@monaco-editor/react';
 import {
   Code,
@@ -14,7 +15,9 @@ import {
   Settings,
   Indent,
   Braces,
-  Palette
+  Palette,
+  Home,
+  ChevronRight
 } from 'lucide-react';
 
 interface FormatOptions {
@@ -322,6 +325,39 @@ server {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-gray-900 dark:via-green-900 dark:to-emerald-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* 面包屑导航 */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-4"
+        >
+          <Link href="/" className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Home className="w-4 h-4 mr-1" />
+            主页
+          </Link>
+          <ChevronRight className="w-4 h-4" />
+          <Link href="/tools/config-formatter" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            配置格式化器
+          </Link>
+          <ChevronRight className="w-4 h-4" />
+          <span className="text-gray-900 dark:text-gray-100">Nginx 配置格式化器</span>
+        </motion.div>
+
+        {/* 返回按钮 */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="mb-6"
+        >
+          <Link
+            href="/tools/config-formatter"
+            className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+          >
+            <ChevronRight className="w-4 h-4 mr-1 rotate-180" />
+            返回配置格式化器
+          </Link>
+        </motion.div>
+
         {/* 页面标题 */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -344,8 +380,7 @@ server {
           className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center"
-            >
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
               <Settings className="w-5 h-5 mr-2" />
               格式化选项
             </h3>
@@ -362,8 +397,7 @@ server {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 缩进大小
               </label>
               <select
@@ -385,8 +419,7 @@ server {
                 onChange={(e) => setOptions(prev => ({ ...prev, useSpaces: e.target.checked }))}
                 className="mr-2"
               />
-              <label htmlFor="useSpaces" className="text-sm text-gray-700 dark:text-gray-300"
-              >
+              <label htmlFor="useSpaces" className="text-sm text-gray-700 dark:text-gray-300">
                 使用空格
               </label>
             </div>
@@ -399,8 +432,7 @@ server {
                 onChange={(e) => setOptions(prev => ({ ...prev, validateBrackets: e.target.checked }))}
                 className="mr-2"
               />
-              <label htmlFor="validateBrackets" className="text-sm text-gray-700 dark:text-gray-300"
-              >
+              <label htmlFor="validateBrackets" className="text-sm text-gray-700 dark:text-gray-300">
                 括号检查
               </label>
             </div>
@@ -413,8 +445,7 @@ server {
                 onChange={(e) => setOptions(prev => ({ ...prev, preserveComments: e.target.checked }))}
                 className="mr-2"
               />
-              <label htmlFor="preserveComments" className="text-sm text-gray-700 dark:text-gray-300"
-              >
+              <label htmlFor="preserveComments" className="text-sm text-gray-700 dark:text-gray-300">
                 保留注释
               </label>
             </div>
@@ -427,8 +458,7 @@ server {
                 onChange={(e) => setOptions(prev => ({ ...prev, highlightSyntax: e.target.checked }))}
                 className="mr-2"
               />
-              <label htmlFor="highlightSyntax" className="text-sm text-gray-700 dark:text-gray-300"
-              >
+              <label htmlFor="highlightSyntax" className="text-sm text-gray-700 dark:text-gray-300">
                 语法高亮
               </label>
             </div>
@@ -454,14 +484,12 @@ server {
               </h3>
               <div className="space-y-2">
                 {validation.errors.map((error, index) => (
-                  <div key={index} className="text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/20 p-2 rounded"
-                  >
+                  <div key={index} className="text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/20 p-2 rounded">
                     {error}
                   </div>
                 ))}
                 {validation.warnings.map((warning, index) => (
-                  <div key={index} className="text-yellow-600 dark:text-yellow-400 text-sm bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded"
-                  >
+                  <div key={index} className="text-yellow-600 dark:text-yellow-400 text-sm bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded">
                     {warning}
                   </div>
                 ))}
@@ -480,8 +508,7 @@ server {
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center"
-              >
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
                 <Code className="w-5 h-5 mr-2" />
                 Nginx 配置内容
               </h3>
@@ -493,8 +520,7 @@ server {
                     <span className="text-sm">格式正确</span>
                   </div>
                 ) : (
-                  <div className="flex items-center text-red-500"
-                  >
+                  <div className="flex items-center text-red-500">
                     <AlertCircle className="w-5 h-5 mr-1" />
                     <span className="text-sm">有错误</span>
                   </div>
@@ -502,8 +528,7 @@ server {
               </div>
             </div>
 
-            <div className="h-96 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden"
-            >
+            <div className="h-96 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
               <Editor
                 height="100%"
                 language="nginx"
@@ -523,10 +548,8 @@ server {
               />
             </div>
 
-            <div className="flex items-center justify-between mt-4"
-            >
-              <div className="flex items-center space-x-2"
-              >
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex items-center space-x-2">
                 <button
                   onClick={() => document.getElementById('fileInput')?.click()}
                   className="flex items-center px-3 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors text-sm"
@@ -560,16 +583,13 @@ server {
             transition={{ delay: 0.4 }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
           >
-            <div className="flex items-center justify-between mb-4"
-            >
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center"
-              >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
                 <Palette className="w-5 h-5 mr-2" />
                 格式化结果
               </h3>
 
-              <div className="flex items-center space-x-2"
-              >
+              <div className="flex items-center space-x-2">
                 <button
                   onClick={copyOutput}
                   className="flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors text-sm"
@@ -587,8 +607,7 @@ server {
               </div>
             </div>
 
-            <div className="h-96 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden"
-            >
+            <div className="h-96 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
               <Editor
                 height="100%"
                 language="nginx"

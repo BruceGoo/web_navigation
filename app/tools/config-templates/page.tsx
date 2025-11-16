@@ -2,7 +2,8 @@
 
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, Download, Search, Filter, Star, BookOpen, Code, FileText, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Copy, Download, Search, Filter, Star, BookOpen, Code, FileText, CheckCircle, Home, ChevronRight } from 'lucide-react';
 
 interface ConfigTemplate {
   id: string;
@@ -352,6 +353,34 @@ export default function ConfigTemplates() {
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             专业的配置文件模板库，包含 Nginx、Dockerfile、Kubernetes 等常用配置模板，一键复制使用
           </p>
+        {/* 面包屑导航 */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400 mb-4"
+        >
+          <Link href="/" className="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <Home className="w-4 h-4 mr-1" />
+            主页
+          </Link>
+          <ChevronRight className="w-4 h-4" />
+          <span className="text-gray-900 dark:text-gray-100">配置模板中心</span>
+        </motion.div>
+
+        {/* 返回按钮 */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="mb-6"
+        >
+          <Link
+            href="/tools"
+            className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+          >
+            <ChevronRight className="w-4 h-4 mr-1 rotate-180" />
+            返回工具中心
+          </Link>
+        </motion.div>
         </motion.div>
 
         {/* 搜索和过滤 */}
